@@ -45,4 +45,11 @@ public class PersonController {
 
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) throws PersonNotFoundException {
+
+        personServices.deleteById(id);
+
+    }
+
 }
