@@ -1,6 +1,5 @@
 package one.digitalinnovation.personapi.models.dto.request;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,8 +22,8 @@ public class PhoneDTO {
     @Enumerated(EnumType.STRING)
     private PhoneType type;
 
-    @NotEmpty
-    @Size(min = 13, max = 14)
+    @NotEmpty(message = "Number field is required.")
+    @Size(min = 13, max = 14, message = "Number field must be between 13 and 14.")
     private String number;
 
 }

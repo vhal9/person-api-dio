@@ -19,22 +19,22 @@ public class PersonDTO {
 
     private Long id;
 
-    @NotEmpty
-    @Size(min = 2, max = 100)
+    @NotEmpty(message = "First name field is required")
+    @Size(min = 2, max = 100, message = "First name field must be between 2 and 100")
     private String firstName;
 
-    @NotEmpty
-    @Size(min = 2, max = 100)
+    @NotEmpty(message = "Last name field is required")
+    @Size(min = 2, max = 100, message = "Last name field must be between 2 and 100")
     private String lastName;
 
-    @NotEmpty
-    @CPF
+    @NotEmpty(message = "CPF field is required.")
+    @CPF(message = "Invalid CPF")
     private String cpf;
 
     private String birthDate;
 
     @Valid
-    @NotEmpty
+    @NotEmpty(message = "phones field is required")
     private List<PhoneDTO> phones;
 
 }
