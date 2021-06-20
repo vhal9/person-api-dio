@@ -1,9 +1,9 @@
 package one.digitalinnovation.personapi.controllers;
 
+import lombok.AllArgsConstructor;
 import one.digitalinnovation.personapi.exceptions.PersonNotFoundException;
 import one.digitalinnovation.personapi.models.dto.request.PersonDTO;
 import one.digitalinnovation.personapi.models.dto.response.MessageResponseDTO;
-import one.digitalinnovation.personapi.models.entity.Person;
 import one.digitalinnovation.personapi.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,14 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/people")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonController {
 
     private PersonServices personServices;
-
-    @Autowired
-    public PersonController(PersonServices personServices) {
-        this.personServices = personServices;
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
