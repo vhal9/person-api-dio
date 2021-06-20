@@ -10,6 +10,7 @@ Foram desenvolvidos e abordados os seguintes tópicos:
 * Relação de cada uma das operações acima com o padrão arquitetural REST, e a explicação de cada um dos conceitos REST envolvidos durante o desenvolvimento do projeto.
 * Desenvolvimento de testes unitários para validação das funcionalidades
 * Implantação do sistema na nuvem através do Heroku
+* Adicionado uma Api de erros para centralizar exceções e padronizar mensagens de erro.
 
 Para executar o projeto no terminal, digite o seguinte comando:
 
