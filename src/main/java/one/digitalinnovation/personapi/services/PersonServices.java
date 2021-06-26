@@ -1,6 +1,7 @@
 package one.digitalinnovation.personapi.services;
 
 import lombok.AllArgsConstructor;
+import one.digitalinnovation.personapi.exceptions.PersonAlreadyRegisteredException;
 import one.digitalinnovation.personapi.exceptions.PersonNotFoundException;
 import one.digitalinnovation.personapi.mappers.PersonMapper;
 import one.digitalinnovation.personapi.models.dto.request.PersonDTO;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,7 +24,9 @@ public class PersonServices {
 
     private final PersonMapper personMapper = PersonMapper.INSTANCE;
 
-    public MessageResponseDTO createPerson(@RequestBody PersonDTO personDTO){
+    public MessageResponseDTO createPerson(@RequestBody PersonDTO personDTO) throws PersonAlreadyRegisteredException {
+
+        verifyIfCpfIsAlreadyRegistered(personDTO.getCpf());
 
         Person personToSave = personMapper.toModel(personDTO);
         Person savedPerson = personRepository.save(personToSave);
@@ -79,6 +83,16 @@ public class PersonServices {
                 .builder()
                 .message(message + id)
                 .build();
+
+    }
+
+    private void verifyIfCpfIsAlreadyRegistered(String cpf) throws PersonAlreadyRegisteredException {
+
+        Optional<Person> person = personRepository.findFirstByCpf(cpf);
+
+        if (person.isPresent()) {
+            throw new PersonAlreadyRegisteredException(cpf);
+        }
 
     }
 }

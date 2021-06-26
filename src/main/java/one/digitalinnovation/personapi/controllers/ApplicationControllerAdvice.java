@@ -1,6 +1,7 @@
 package one.digitalinnovation.personapi.controllers;
 
 import one.digitalinnovation.personapi.exceptions.ApiError;
+import one.digitalinnovation.personapi.exceptions.PersonAlreadyRegisteredException;
 import one.digitalinnovation.personapi.exceptions.PersonNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -30,6 +31,14 @@ public class ApplicationControllerAdvice {
     @ExceptionHandler(PersonNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiError handlePersonNotFoundException(PersonNotFoundException ex) {
+
+        return new ApiError(ex.getMessage());
+
+    }
+
+    @ExceptionHandler(PersonAlreadyRegisteredException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiError handlePersonAlreadyRegisteredException(PersonAlreadyRegisteredException ex) {
 
         return new ApiError(ex.getMessage());
 

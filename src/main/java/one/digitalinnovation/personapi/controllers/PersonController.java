@@ -1,6 +1,7 @@
 package one.digitalinnovation.personapi.controllers;
 
 import lombok.AllArgsConstructor;
+import one.digitalinnovation.personapi.exceptions.PersonAlreadyRegisteredException;
 import one.digitalinnovation.personapi.exceptions.PersonNotFoundException;
 import one.digitalinnovation.personapi.models.dto.request.PersonDTO;
 import one.digitalinnovation.personapi.models.dto.response.MessageResponseDTO;
@@ -21,7 +22,7 @@ public class PersonController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO createPerson(@RequestBody @Valid PersonDTO personDTO){
+    public MessageResponseDTO createPerson(@RequestBody @Valid PersonDTO personDTO) throws PersonAlreadyRegisteredException {
 
         return personServices.createPerson(personDTO);
 
